@@ -13,7 +13,6 @@ public class lastOccurrence {
         if(i == arr.length) return -1;
         int isFound = lastOcc(arr, key, i+1);
         if(isFound == -1 && arr[i] == key) return i;
-
         return isFound;
         
     }
