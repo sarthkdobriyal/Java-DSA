@@ -1,8 +1,9 @@
 package backtraking;
 
 public class Nqueens {
+    static int count = 0;
     public static void main(String[] args) {
-        int n =4;
+        int n =5;
         char[][] board = new char[n][n];
 
         //initialize
@@ -12,10 +13,12 @@ public class Nqueens {
             }
         }
         nqueens(board, 0);
+        System.out.println("Total ways to place  " + n + " queens are = " + count);
     }
 
     private static void nqueens(char[][] board , int row) {
         if(row == board.length){
+            count++;
             print(board);
             return;
         }

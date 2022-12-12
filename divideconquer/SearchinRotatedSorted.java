@@ -1,9 +1,11 @@
 package divideconquer;
 
 public class SearchinRotatedSorted {
+
+    
     public static void main(String[] args) {
-        int arr[] = {4,5,6,7,8,0,1,2,3};
-        int tar = 44;
+        int arr[] = {4,5,6,7,0,1,2};
+        int tar = 0;
         System.out.println(search(arr,tar,0,arr.length-1));
     }
 
