@@ -38,6 +38,7 @@ public class PairSumTwo {
         for(int i =0;i<list.size()-1;i++){
             if(list.get(i) > list.get(i+1)){
                 pivot = i;
+                break;
             }
         }
 
