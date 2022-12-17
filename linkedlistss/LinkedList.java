@@ -6,18 +6,22 @@ public class LinkedList {
         int data;
         Node next;
 
-        public Node(int data){
+         Node(int data){
             this.data= data;
             this.next = null;
         }
+
+        Node(){
+
+        }
+        
     }
 
-    static Node head;
-    static Node tail;
-    static int size =0; 
+     Node head;
+     Node tail;
+     int size =0; 
 
     public void addFirst(int data){
-        
         //create new node
         Node newNode = new Node(data);
         size++;
@@ -186,7 +190,7 @@ public class LinkedList {
     //slow-fast Approach to find mid
     public Node findMid(Node head){
         Node slow = head;
-        Node fast = head;
+        Node fast = head.next;
 
         while(fast !=null && fast.next !=null){
             slow= slow.next;
@@ -231,10 +235,145 @@ public class LinkedList {
 
     }
 
+    //TO check for cycle in a LL
+    public boolean isCyclic(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null  && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    //TO remove a cycle from LL
+    public void removeCycle(Node head){
+        //CHeck if cyclic
+        Node slow = head; 
+        Node fast = head; 
+        boolean isCycle = false;
+
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                isCycle = true;
+                break;
+            }
+        }
+        
+        //make slow -> head
+        if(isCycle){
+            slow = head;
+            Node prev = null;
+            //move slow and fast until they meet while storing prev of fast
+            while(slow != fast){
+                slow= slow.next;
+                prev = fast;
+                fast = fast.next;
+            }
+            //Make next of prev = null to break cycle
+            prev.next = null;
+
+
+        }
+
+
+    }
+
+
+    //Merge Sort Linked list
+    private Node mergeSort(Node head){
+
+        if(head == null || head.next == null  ){
+            return head;
+        }
+
+        Node midNode = findMid(head);
+        
+        Node rightHead = midNode.next;
+        midNode.next = null;
+        Node lh = mergeSort(head);
+        Node rh = mergeSort(rightHead);
+        return merge(lh,rh);
+    }
+
+    //To merge two  sorted linkeedList
+    private Node merge(Node lhead, Node rhead){
+        Node mergedLL = new Node(-1);
+        Node temp = mergedLL;
+
+        while(lhead != null && rhead != null){
+            if(lhead.data <= rhead.data){
+                temp.next = lhead;
+                lhead = lhead.next;
+                temp = temp.next;
+            }else{
+                temp.next = rhead;
+                rhead = rhead.next;
+                temp = temp.next;
+            }
+        }
+
+        while(lhead != null){
+            temp.next = lhead;
+            lhead = lhead.next;
+            temp = temp.next;
+        }
+        while(rhead != null){
+            temp.next = rhead;
+            rhead = rhead.next;
+            temp = temp.next;
+        }
+
+        return mergedLL.next;
+
+
+    }
+
+
+    private void zigzag(Node head){
+        Node mid = findMid(head);
+        
+
+        //reverse half linkedlist
+        Node prev = null;
+        Node curr = mid;
+        Node next = null;
+
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        Node lp = head;
+        Node rp = prev;
+
+        while(rp != null && lp!=null){
+            Node lpNext = lp.next;
+            lp.next = rp;
+            lp = lpNext;
+            Node rpNext = rp.next;
+            rp.next = lpNext;
+            rp = rpNext;
+        }
+
+
+
+    }
 
 
 
 
+    //To print our Linked list
     public void print(){
         if(head == null){
             System.out.println("LL is empty");
@@ -257,11 +396,16 @@ public class LinkedList {
         ll.addFirst(1);
         
         ll.addLast(3);
-        ll.addLast(2);
-        ll.addLast(1);
+        ll.addLast(4);
+        ll.addLast(5);
+        ll.addLast(6);
+        // ll.addLast(5);
         ll.print();
         
-        System.out.println("is PAlindrome: " + ll.isLLPalindrome());
+        ll.head = ll.mergeSort(ll.head);
+        ll.zigzag(ll.head);
+        ll.print();
+        // System.out.println("is PAlindrome: " + ll.isLLPalindrome());
         // ll.reverse();
         // ll.deleteNthLast(3);
         

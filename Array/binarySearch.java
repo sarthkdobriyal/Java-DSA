@@ -5,6 +5,9 @@ public class binarySearch {
         int[] arr = {2,4,6,8,10};
         int key = 1;
 
+        String s = new String();
+        System.out.println(s);
+
         int idx = binSearch(arr, key);
         if(idx != -1){
             System.out.println("Found at " + idx);

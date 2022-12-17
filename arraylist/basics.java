@@ -28,7 +28,7 @@ public class basics {
         System.out.println("Sorted : " + list);
     }   
     
-    private static void printReverse(ArrayList list) {
+    private static void printReverse(ArrayList<Integer> list) {
         System.out.print ("List in reverse: ");
         for(int i= list.size()-1;i>=0;i--){
             System.out.print(list.get(i) + " ");
