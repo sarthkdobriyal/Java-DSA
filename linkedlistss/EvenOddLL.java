@@ -26,7 +26,7 @@ public class EvenOddLL {
         Node oddHead = getOdd(ll.head);
 
         Node temp = evenHead;
-        while(temp != null){
+        while(temp.next != null){
             temp = temp.next;
         }
         temp.next = oddHead;
