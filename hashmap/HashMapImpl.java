@@ -23,6 +23,7 @@ public class HashMapImpl {
         private int N;
         private LinkedList<Node> buckets[];
 
+        @SuppressWarnings("unchecked")
         public HashMap(){
             this.n=0;
             this.N=4;
@@ -50,6 +51,7 @@ public class HashMapImpl {
             return di;
         }
 
+        @SuppressWarnings("unchecked")
         private void rehash(){
             LinkedList<Node> oldBuc[] = buckets;
             buckets = new LinkedList[2*N];
