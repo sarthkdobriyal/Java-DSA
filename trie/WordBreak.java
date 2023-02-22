@@ -4,7 +4,6 @@ public class WordBreak extends MyTrie {
     public static void main(String[] args) {
         String[] words = {"i", "like", "sam", "samsung", "mobile", "ice","any"};
         String key = "ilikesamsung";
-        MyTrie trie = new MyTrie();
         for (String word : words) {
             insert( word);
         }
