@@ -49,8 +49,17 @@ public class graphImpl {
     }
 
     // Breadth First Search -->< O(v+e)
-    public static void bfs(ArrayList<Edge> graph[]) {
+    public static void bfs(ArrayList<Edge> graph[]){
         boolean[] visited = new boolean[graph.length];
+        for(int i=0;i<graph.length;i++){
+            if(!visited[i]){
+                bfsUtil(graph, visited);
+            }
+        }
+    }
+
+
+    public static void bfsUtil(ArrayList<Edge> graph[], boolean visited[]) {
         Queue<Integer> q = new LinkedList<>();
 
         q.add(0);
@@ -73,14 +82,25 @@ public class graphImpl {
 
 
     //Depth First Search (recursively) --> O(V + E)
-    public static void dfs(ArrayList<Edge> graph[], boolean[] visited, int src ) {
+    public static void dfs(ArrayList<Edge> graph[]) {
+        boolean[] visited = new boolean[graph.length];
+        for(int i=0;i<graph.length;i++){
+            if(!visited[i]){
+                dfsUtil(graph, visited, 0);
+            }
+        }
+
+    }
+
+
+    public static void dfsUtil(ArrayList<Edge> graph[], boolean[] visited, int src ) {
 
 
         visited[src] = true;
         System.out.print(src + " ");
         for(Edge e : graph[src]){
             if(!visited[e.dest]){
-                dfs(graph, visited, e.dest);
+                dfsUtil(graph, visited, e.dest);
             }
         }
     }
@@ -116,7 +136,7 @@ public class graphImpl {
         createGraph(graph);
         bfs(graph);
         System.out.println();
-        dfs(graph,new boolean[graph.length], 0);
+        dfs(graph);
         System.out.println();
         System.out.println(hasPath(graph,new boolean[graph.length], 2, 5));
 
